@@ -7,7 +7,7 @@ import { Discussion } from '../community-users/shared/discussion';
 import { Message } from '../community-users/shared/message';
 
 @Injectable()
-export class CommunityuserService {
+export class UpdateServiceService {
   itemsCollection_users: AngularFirestoreCollection<Discussion>;
   items_users: Observable<Discussion[]>;
   itemDoc_users: AngularFirestoreDocument<Discussion>;
@@ -47,7 +47,7 @@ export class CommunityuserService {
       if (data.length <= 0) {
       } else {
         for (let i = 0; i < data.length; i++) {
-        //   console.log(data[i]);
+          //   console.log(data[i]);
           const UserTemp: Discussion = <Discussion>{
           };
           UserTemp.discussion_key = data[i].discussion_key;
@@ -58,7 +58,7 @@ export class CommunityuserService {
 
           if (UserTemp.discussion_key === Userid) {
             // this.updatediscussion(UserTemp);
-           // console.log('Show data ' + UserTemp.discussion_key + ' ' + UserTemp.discussion_email + ' ' + UserTemp.discussion_topic);
+            // console.log('Show data ' + UserTemp.discussion_key + ' ' + UserTemp.discussion_email + ' ' + UserTemp.discussion_topic);
             this.Discussion = UserTemp;
             return this.Discussion;
           }
@@ -81,7 +81,7 @@ export class CommunityuserService {
 
   getTopic(Userid: string) {
     //  this.items_users.subscribe(data => console.log(data));
-     this.items_users.subscribe(data => {
+    this.items_users.subscribe(data => {
       if (data.length <= 0) {
       } else {
         for (let i = 0; i < data.length; i++) {
@@ -117,7 +117,7 @@ export class CommunityuserService {
 
   }
   async getDiscussionData(Userid: string): Promise<Discussion[]> {
-  //  this.items_users.subscribe(data => console.log(data));
+    //  this.items_users.subscribe(data => console.log(data));
     await this.items_users.subscribe(data => {
       if (data.length <= 0) {
       } else {
@@ -132,7 +132,7 @@ export class CommunityuserService {
           UserTemp.votes = data[i].votes;
           UserTemp.messages = data[i].messages;
           if (UserTemp.discussion_email === Userid) {
-              // this.updatediscussion(UserTemp);
+            // this.updatediscussion(UserTemp);
             console.log('Show data ' + UserTemp.discussion_key + ' ' + Userid);
 
             this.DicussionList.push(UserTemp);
@@ -166,12 +166,10 @@ export class CommunityuserService {
           UserTemp.discussion_question = data[i].discussion_question;
           UserTemp.votes = data[i].votes;
           UserTemp.messages = data[i].messages;
-          UserTemp.status = data[i].status;
-            // this.updatediscussion(UserTemp);
-            console.log('Show data ' + UserTemp.discussion_key);
-          if ( UserTemp.status === 'open' ) {
-            this.DicussionList.push(UserTemp);
-          }
+          // this.updatediscussion(UserTemp);
+          console.log('Show data ' + UserTemp.discussion_key);
+
+          this.DicussionList.push(UserTemp);
           // tslint:disable-next-line:max-line-length
           // console.log('userlist ' + this.UsersList.length + ' ' + this.UsersList[0].useremail + ' ' + this.UsersList[0].username);
           data[i].discussion_key = '';
@@ -199,8 +197,8 @@ export class CommunityuserService {
     this.itemDoc_users = this.afs.doc(`discussion/${item.discussion_key}`);
     try {
       this.itemDoc_users.update(item);
-    } catch ( error )  {
-      console.log('error ' +  error);
+    } catch (error) {
+      console.log('error ' + error);
     }
 
   }
