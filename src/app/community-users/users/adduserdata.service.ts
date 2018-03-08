@@ -3,11 +3,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { Users } from './shared/users';
+import { Users } from '../shared/users';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class GetuserinfoService {
+export class AdduserdataService {
   UsersList: Users[] = [];
   itemsCollection_users: AngularFirestoreCollection<Users>;
   items_users: Observable<Users[]>;
@@ -74,7 +74,7 @@ export class GetuserinfoService {
 
           if (user1.toLowerCase.toString() === user2.toLowerCase.toString()) {
             console.log(' found ' + UserTemp.useremail);
-          return UserTemp;
+            return UserTemp;
           }
           // tslint:disable-next-line:max-line-length
           // console.log('userlist ' + this.UsersList.length + ' ' + this.UsersList[0].useremail + ' ' + this.UsersList[0].username);
@@ -89,6 +89,9 @@ export class GetuserinfoService {
     return this.Discussion;
   }
   adduser(item: Users) {
+    this.itemsCollection_users.add(item);
+  }
+  insertuser(item: Users) {
     this.itemsCollection_users.add(item);
   }
   deleteuser(item: Users) {

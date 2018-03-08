@@ -130,12 +130,21 @@ export class ViewOnlyService {
           UserTemp.discussion_email = data[i].discussion_email;
           UserTemp.discussion_question = data[i].discussion_question;
           UserTemp.status = data[i].status;
-
+          UserTemp.username = data[i].username;
           UserTemp.votes = data[i].votes;
           UserTemp.messages = data[i].messages;
-          if (UserTemp.discussion_email === Userid && UserTemp.status === 'open')  {
+          // tslint:disable-next-line:max-line-length
+          console.log('Show data from ' + UserTemp.discussion_key + ' ' + Userid);
+          // tslint:disable-next-line:prefer-const
+          // tslint:disable-next-line:no-var-keyword
+          var useremail1 = UserTemp.discussion_email.toLocaleLowerCase.toString();
+            // tslint:disable-next-line:prefer-const
+          // tslint:disable-next-line:no-var-keyword
+          var useremail2 = Userid.toLocaleLowerCase.toString();
+
+          if (useremail1.toLocaleLowerCase.toString() === useremail2.toLocaleLowerCase.toString() && UserTemp.status === 'open')  {
             // this.updatediscussion(UserTemp);
-            console.log('Show data ' + UserTemp.discussion_key + ' ' + Userid);
+            console.log('Show data from ' + UserTemp.discussion_key + ' ' + Userid);
 
             this.DicussionList.push(UserTemp);
           }

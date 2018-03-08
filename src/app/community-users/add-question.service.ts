@@ -132,7 +132,7 @@ export class AddQuestionService {
           UserTemp.votes = data[i].votes;
           UserTemp.messages = data[i].messages;
           if (UserTemp.discussion_email === Userid) {
-            // this.updatediscussion(UserTemp);
+             this.updatediscussion(UserTemp);
             console.log('Show data ' + UserTemp.discussion_key + ' ' + Userid);
 
             this.DicussionList.push(UserTemp);
@@ -187,11 +187,15 @@ export class AddQuestionService {
 
   }
   adddiscussion(item: Discussion) {
-    this.itemsCollection_users.add(item);
+  try {  this.itemsCollection_users.add(item);
     // const id = this.afs.createId();
     // console.log('id   ' + id);
 
     item.discussion_key = this.itemsCollection_users.ref.id;
+    alert('Question added ');
+  } catch (error) {
+    alert('Question No added ');
+    }
   }
   deletediscussion(item: Discussion) {
     this.itemDoc_users = this.afs.doc(`discussion/${item.discussion_key}`);
@@ -202,8 +206,10 @@ export class AddQuestionService {
     this.itemDoc_users = this.afs.doc(`discussion/${item.discussion_key}`);
     try {
       this.itemDoc_users.update(item);
+     // alert('Discussion Updated');
     } catch (error) {
       console.log('error ' + error);
+     // alert('Discussion not Updated');
     }
 
   }

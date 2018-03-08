@@ -17,6 +17,7 @@ import { DataserviceService } from '../community-users/dataservice.service';
 import { ViewOnlyService } from './view-only.service';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { GetuserinfoService } from '../community-users/getuserinfo.service';
+import { User } from '@firebase/auth-types';
 
 @Component({
   selector: 'app-community-users',
@@ -75,7 +76,10 @@ export class CommunityUsersComponent implements OnInit {
     votes: ''
   };
   messages: Message[] = [];
-
+  UsersShown: Users = <Users>{
+  useremail: '',
+  username: ''
+  };
   Discussion: Discussion = <Discussion>{
     discussion_key: 'S39ahhy4YrpEjAFdmpv4',
     discussion_topic: 'hellome',
@@ -131,7 +135,9 @@ export class CommunityUsersComponent implements OnInit {
 
    // this.communityuserService.adddiscussion(this.Discussion);
  //   console.log('userlist ' + this.UsersList.length + ' ' );
-    this.getFromLocal('useremail');
+    this.getFromLocalemail('useremail');
+    this.getFromLocalname('username');
+
 }
   // onclicked() {
   //   this.value = 10;
@@ -186,17 +192,22 @@ showdata() {
   viewAsked() {
    // location.reload();
     console.log('view only');
-    this.Useremail = 'umer@nu.edu.pk';
+   // this.Useremail = 'umer@nu.edu.pk';
     this.viewservice.getDiscussionData(this.Useremail).then(list => this.DiscussionList = list);
-    this.hide = false;
-
   }
-  getFromLocal(key): void {
-    console.log('recieved= key:' + key);
+  getFromLocalemail(key): void {
+    console.log('==> recieved = key for name:' + key);
     this.Useremail = this.storage.get(key);
-    console.log('get useer email ' + this.Useremail);
-     this.getinfoservice.getuserData(this.Useremail);
-
+    console.log('get user email ' + this.Useremail);
+    this.getinfoservice.getuserData(this.Useremail).then(list => this.UsersShown = list);
+    console.log(' usere email ' + this.UsersShown.username);
+  }
+  getFromLocalname(key): void {
+    console.log('recieved = key:' + key);
+    this.username = this.storage.get(key);
+    console.log('get user name ' + this.username);
+   // this.getinfoservice.getuserData(this.username).then(list => this.UsersShown = list);
+   //   console.log(' user email ' + this.UsersShown.username);
   }
   addItem() {
     /*this.goals.push(this.goalText);
@@ -206,7 +217,8 @@ showdata() {
     */
     // tslint:disable-next-line:no-unused-expression
     // tslint:disable-next-line:label-position
-    this.Useremail = 'umer@nu.edu.pk';
+    // this.Useremail = 'umer@nu.edu.pk';
+
     console.log(' data inserted ' + this.goalText);
     this.mesagelist.answer = this.goalText;
     this.mesagelist.answer_useremail = this.Useremail;

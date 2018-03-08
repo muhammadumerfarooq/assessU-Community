@@ -35,7 +35,7 @@
           <div class="life-container">
             <p>{{item.discussion_topic}}</p>
             <p> * {{item.discussion_question}}</p>
-
+            <p> {{item.username}}</p>
           </div>
 
         </li>
@@ -47,18 +47,20 @@
 <div *ngIf="hide">
   <div class="container color-dark">
     <div class="col">
-      <p>QUESTION : </p>
+      <p>Topic : </p>
       <br>
-      <p>{{discussionQuestion}} </p>
+      <p>{{discussionTopic}} </p>
     </div>
+        <div class="col">
+          <p> Total Answers </p>
+        </div>
 
     <div class="col">
-      <p> User Name : </p>
+      <p>Question: </p><br>
+      <p>{{discussionQuestion}}</p>
     </div>
 
-    <div class="col">
-      <p> Total Answers </p>
-    </div>
+
   </div>
   <div class="container color-light">
     <div class="col">

@@ -7,4 +7,5 @@ export class Discussion {
     discussion_question: string;
     messages: Message[];
     status: string;
+    username: string;
 }

@@ -167,6 +167,8 @@ export class CommunityuserService {
           UserTemp.votes = data[i].votes;
           UserTemp.messages = data[i].messages;
           UserTemp.status = data[i].status;
+          UserTemp.username = data[i].username;
+          UserTemp.discussion_email = data[i].discussion_email;
             // this.updatediscussion(UserTemp);
             console.log('Show data ' + UserTemp.discussion_key);
           if ( UserTemp.status === 'open' ) {

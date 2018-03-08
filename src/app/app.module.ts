@@ -23,13 +23,16 @@ import { AdddiscussionComponent } from './community-users/adddiscussion/adddiscu
 import { AddQuestionService } from './community-users/add-question.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { GetuserinfoService } from './community-users/getuserinfo.service';
+import { UserLoginComponent } from './community-users/adddiscussion/user-login.component';
+import { AdduserdataService } from './community-users/users/adduserdata.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     CommunityUsersComponent,
     // SelectedDiscussionComponent,
-    AdddiscussionComponent
+    AdddiscussionComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { GetuserinfoService } from './community-users/getuserinfo.service';
     StorageServiceModule
   ],
   // tslint:disable-next-line:max-line-length
-  providers: [GetuserinfoService, AngularFirestore, CommunityuserService, UsersService, DataserviceService, ViewOnlyService, UpdateServiceService, AddQuestionService ],
+  providers: [GetuserinfoService, AngularFirestore, AdduserdataService, CommunityuserService, UsersService, DataserviceService, ViewOnlyService, UpdateServiceService, AddQuestionService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
